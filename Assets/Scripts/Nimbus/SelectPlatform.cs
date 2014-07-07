@@ -10,7 +10,7 @@ public class SelectPlatform : MonoBehaviour {
     public GameObject imgTarget, arCam;
     public GameObject pcCam;
 
-    int connectionPort = 25001;
+    public int connectionPort = 25001;
     bool refreshing;
     private HostData[] hostData;
 

@@ -10,7 +10,7 @@ public class AddButton : MonoBehaviour {
 	void Start(){
 #if UNITY_ANDROID
 		transform.position = cam2d.ViewportToWorldPoint(new Vector3(0.5f,0.015f,Mathf.Abs(transform.position.z - cam2d.transform.position.z)));
-        collider2D.enabled = false;
+        //collider2D.enabled = false;
 #else
         collider2D.enabled = false;
         renderer.enabled = false;

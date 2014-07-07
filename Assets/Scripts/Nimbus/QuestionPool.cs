@@ -29,7 +29,7 @@ public class QuestionPool : MonoBehaviour {
                 questions[i].transform.position = atractors[randomAtractor].transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
 				questions[i].transform.rotation = atractors[randomAtractor].transform.rotation;
 				questions[i].transform.parent = atractors[randomAtractor];
-
+                questions[i].GetComponent<QuestionBehaviour>().question = Profile.data.question[i];
 				return questions[i];
 			}
 		}

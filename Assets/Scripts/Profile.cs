@@ -38,28 +38,22 @@ public class GameData{
 /// Profile.
 /// </summary>
 public class Profile : MonoBehaviour{
-	public GameData data;
+	public static GameData data;
 
 	void Awake(){
 		data = new GameData();
 		DontDestroyOnLoad (gameObject);
 		StartCoroutine(LoadProfile());
-        printProfile();
-        /*for (int i = 0; i < data.question.Length; i++ ){
-            data.question[i].id = "Q" + i;
-            data.question[i].text = "Inserta pregunta aqui";
-            //for (int j = 0; j < data.question[i].answer.Length; j++)
-            //    data.question[i].answer[j].text = "A" + j;
-        }*/
+        //printProfile();
+        
 	}
-	
+
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.S))
 			SaveProfile();
 
         if (Input.GetKeyDown(KeyCode.P))
             printProfile();
-        		
 
         if(Input.GetKeyDown(KeyCode.L))
             StartCoroutine(LoadProfile());
@@ -67,7 +61,8 @@ public class Profile : MonoBehaviour{
         if(Input.GetKeyDown(KeyCode.C)){
             for (int i = 0; i < data.question.Length; i++ ){
                 data.question[i].id = "Q" + i;
-                data.question[i].text = "";
+                data.question[i].text = "Question "+i;
+                data.question[i].active = false;
                 for (int j = 0; j < data.question[i].answer.Length; j++)
                     data.question[i].answer[j].text = "A" + j;
             }
@@ -89,8 +84,8 @@ public class Profile : MonoBehaviour{
         for (int i = 0; i < data.question.Length; i++)
         {
             print(data.question[i].text);
-            //for (int j = 0; j < data.question[i].answer.Length; j++)
-            //    print(data.question[i].answer[j].text);
+            for (int j = 0; j < data.question[i].answer.Length; j++)
+                print(data.question[i].answer[j].text);
         }
     }
 
