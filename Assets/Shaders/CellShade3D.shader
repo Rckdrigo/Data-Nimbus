@@ -46,6 +46,7 @@
       }
       
       Pass {
+         Tags { "LightMode" = "ForwardBase" } 
       	//Cull Back 
       
          CGPROGRAM 
@@ -78,7 +79,7 @@
             output.pos =  mul(UNITY_MATRIX_MVP, input.vertex);
             
             float3 normalDirection = mul(_Object2World,input.normal);
-            float3 lightDirection = normalize(_WorldSpaceLightPos0);
+            float3 lightDirection = normalize(_WorldSpaceLightPos0 );
             output.diffuseIntensity = dot(normalDirection, lightDirection);
  			
  			
@@ -96,4 +97,6 @@
          ENDCG  
       }
    }
+
+   Fallback "Diffuse"
 }

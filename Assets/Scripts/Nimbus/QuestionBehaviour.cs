@@ -6,14 +6,13 @@ public class QuestionBehaviour : MonoBehaviour {
     public GameObject[] satellites;
     public GameData.Question question;
 
-
     void OnMouseDown() {
         for (int i = 0; i < satellites.Length; i++)
         {
             if (!satellites[i].activeInHierarchy)
             {
                 satellites[i].SetActive(true);
-                print(question.text);
+                //print(question.text);
                 break;
             }
         }
@@ -33,4 +32,5 @@ public class QuestionBehaviour : MonoBehaviour {
             }
         }
     }
+
 }

@@ -18,7 +18,7 @@ public class GameData{
     public struct Question
     {
         [XmlAttribute("id")]
-        public string id;
+        public int id;
         [XmlAttribute("active")]
         public bool active;
         public string text;
@@ -43,10 +43,12 @@ public class Profile : MonoBehaviour{
 	void Awake(){
 		data = new GameData();
 		DontDestroyOnLoad (gameObject);
-		StartCoroutine(LoadProfile());
-        //printProfile();
-        
-	}
+    }
+
+#if !UNITY_ANDROID
+    void Start() {
+        StartCoroutine(LoadProfile());
+    }
 
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.S))
@@ -60,7 +62,7 @@ public class Profile : MonoBehaviour{
 
         if(Input.GetKeyDown(KeyCode.C)){
             for (int i = 0; i < data.question.Length; i++ ){
-                data.question[i].id = "Q" + i;
+                data.question[i].id = i;
                 data.question[i].text = "Question "+i;
                 data.question[i].active = false;
                 for (int j = 0; j < data.question[i].answer.Length; j++)
@@ -78,17 +80,39 @@ public class Profile : MonoBehaviour{
         print("Reading");
         yield return data = XMLManager.DeserializeObject<GameData>(XMLManager.LoadXML("profile.xml"));
         print("Finished reading");
+        GetComponent<QuestionPool>().CreatePool();
 	}
+
+    void OnPlayerConnected(NetworkPlayer player){
+        print("Conectado");
+        QuestionPool pool = GetComponent<QuestionPool>();
+        foreach (GameObject q in pool.questions)
+        {
+            if (q.activeInHierarchy)
+            {
+                print( int.Parse(q.name)+"\t"+int.Parse(q.transform.parent.name.Replace("Atractor ", ""))+"\t");
+                networkView.RPC("sendGameDataToPlayer", player, int.Parse(q.name), int.Parse(q.transform.parent.name.Replace("Atractor ", "")), q.transform.position);
+            }
+        }
+    }
 
     void printProfile() {
         for (int i = 0; i < data.question.Length; i++)
         {
-            print(data.question[i].text);
+            print(data.question[i].text + "\t" + data.question[i].active);
             for (int j = 0; j < data.question[i].answer.Length; j++)
                 print(data.question[i].answer[j].text);
         }
     }
 
+#endif
+    [RPC]
+    void sendGameDataToPlayer(int id, int atractor, Vector3 position) {
+        QuestionPool pool = GetComponent<QuestionPool>();
+        pool.questions[id].SetActive(true);
+        pool.questions[id].transform.parent = GameObject.Find("Atractor "+atractor).transform;
+        pool.questions[id].transform.position = position;
+    }
 }
 
 

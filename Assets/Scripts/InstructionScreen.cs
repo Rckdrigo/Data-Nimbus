@@ -22,7 +22,6 @@ public class InstructionScreen : MonoBehaviour {
     }
 
     void Update() { 
-
         if (ss.onPause) {
             collider2D.enabled = true;
             renderer.enabled = true;

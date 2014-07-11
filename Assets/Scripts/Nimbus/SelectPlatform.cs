@@ -4,13 +4,13 @@ using System.Collections;
 
 public class SelectPlatform : MonoBehaviour {
 
-    public string ip = "192.168.1.98";
+    public string ip;//= "192.168.1.98";
 
     public GameObject dataNimbus;
     public GameObject imgTarget, arCam;
     public GameObject pcCam;
 
-    public int connectionPort = 25001;
+    public int connectionPort = 25000;
     bool refreshing;
     private HostData[] hostData;
 
