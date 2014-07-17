@@ -64,7 +64,7 @@ public class Profile : MonoBehaviour{
             for (int i = 0; i < data.question.Length; i++ ){
                 data.question[i].id = i;
                 data.question[i].text = "Question "+i;
-                data.question[i].active = false;
+                data.question[i].active = true;
                 for (int j = 0; j < data.question[i].answer.Length; j++)
                     data.question[i].answer[j].text = "A" + j;
             }

@@ -7,9 +7,12 @@ public class AddButton : MonoBehaviour {
     public SplashScreen ss;
     public GameObject[] atractors;
     public Texture bg;
-    int currentQ;
 
-    bool addingQuestion = false;
+    [HideInInspector()]
+    public int currentQ;
+    [HideInInspector()]
+    public bool addingQuestion = false;
+
     public Texture addAnswer;
     public GUISkin skin;
     string answer = "Lorem ipsum";
@@ -49,7 +52,7 @@ public class AddButton : MonoBehaviour {
     }
 
     [RPC]
-    void AskQuestion(int qId)
+    public void AskQuestion(int qId)
     {
         string temp = pool.questions[qId].GetComponent<QuestionBehaviour>().question.text;
         networkView.RPC("ReturnQuestion", RPCMode.Others, temp);

@@ -7,21 +7,24 @@ public class QuestionBehaviour : MonoBehaviour {
     public GameData.Question question;
 
     void OnMouseDown() {
-        for (int i = 0; i < satellites.Length; i++)
+        if (!GameObject.Find("ButtonAdd").GetComponent<AddButton>().addingQuestion)
         {
-            if (!satellites[i].activeInHierarchy)
+            for (int i = 0; i < satellites.Length; i++)
             {
-                satellites[i].SetActive(true);
-                //print(question.text);
-                break;
+                if (!satellites[i].activeInHierarchy)
+                {
+                    satellites[i].SetActive(true);
+                   break;
+                }
             }
+            GameObject.Find("ButtonAdd").GetComponent<AddButton>().addingQuestion = true;
+            GameObject.Find("ButtonAdd").GetComponent<AddButton>().networkView.RPC("AskQuestion", RPCMode.Server, int.Parse(name));
+            networkView.RPC("activateSatellite", RPCMode.Server, name);
         }
-        networkView.RPC("activateSatellite", RPCMode.Server, name);
     }
 
     [RPC]
     void activateSatellite(string name) {
-        print("Satelite de " + name);
         QuestionBehaviour reference = GameObject.Find(name).GetComponent<QuestionBehaviour>();
         for (int i = 0; i < reference.satellites.Length; i++)
         {
