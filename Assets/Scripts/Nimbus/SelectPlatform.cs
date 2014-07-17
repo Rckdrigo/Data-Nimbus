@@ -9,7 +9,6 @@ public class SelectPlatform : MonoBehaviour {
     public GameObject dataNimbus;
     public GameObject imgTarget, arCam;
     public GameObject pcCam;
-
     public int connectionPort = 25000;
     bool refreshing;
     private HostData[] hostData;
@@ -22,7 +21,6 @@ public class SelectPlatform : MonoBehaviour {
             Destroy(pcCam);
             arCam.SetActive(true);
             imgTarget.SetActive(true);
-            dataNimbus.transform.parent = imgTarget.transform;
             StartCoroutine(seekConnection());
 #else
             pcCam.SetActive(true);

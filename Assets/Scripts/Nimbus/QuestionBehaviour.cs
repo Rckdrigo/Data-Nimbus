@@ -23,6 +23,13 @@ public class QuestionBehaviour : MonoBehaviour {
         }
     }
 
+	void OnPreRender() {
+		GL.wireframe = true;
+	}
+	void OnPostRender() {
+		GL.wireframe = false;
+	}
+
     [RPC]
     void activateSatellite(string name) {
         QuestionBehaviour reference = GameObject.Find(name).GetComponent<QuestionBehaviour>();
