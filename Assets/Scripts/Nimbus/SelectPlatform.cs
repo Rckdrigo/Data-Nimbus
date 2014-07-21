@@ -54,8 +54,10 @@ public class SelectPlatform : MonoBehaviour {
     }
 
     void OnDisconnectedFromServer(NetworkDisconnection info){
-        Application.Quit();
+        //Application.Quit();
+        StartCoroutine(seekConnection());
     }
+
 
     void OnMasterServerEvent(MasterServerEvent mse)
     {

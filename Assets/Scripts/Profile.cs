@@ -51,6 +51,9 @@ public class Profile : MonoBehaviour{
     }
 
 	void Update(){
+        if (!Network.isServer)
+            SaveProfile();
+
 		if(Input.GetKeyDown(KeyCode.S))
 			SaveProfile();
 
@@ -71,10 +74,11 @@ public class Profile : MonoBehaviour{
         }
 	}
 	
-	public void SaveProfile(){
-        XMLManager.CreateXML("profile.xml", XMLManager.SerializeObject(data, "GameData"));
-	}
 	
+	
+    void OnDestroy(){
+        SaveProfile();
+    }
 
 	public IEnumerator LoadProfile(){
         print("Reading");
@@ -96,6 +100,11 @@ public class Profile : MonoBehaviour{
         }
     }
 
+    void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        SaveProfile();
+    }
+
     void printProfile() {
         for (int i = 0; i < data.question.Length; i++)
         {
@@ -106,6 +115,11 @@ public class Profile : MonoBehaviour{
     }
 
 #endif
+
+    public static void SaveProfile()
+    {
+        XMLManager.CreateXML("profile.xml", XMLManager.SerializeObject(data, "GameData"));
+    }
     [RPC]
     void sendGameDataToPlayer(int id, int atractor, Vector3 position) {
         QuestionPool pool = GetComponent<QuestionPool>();

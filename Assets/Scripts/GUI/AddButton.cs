@@ -55,6 +55,8 @@ public class AddButton : MonoBehaviour {
     public void AskQuestion(int qId)
     {
         string temp = pool.questions[qId].GetComponent<QuestionBehaviour>().question.text;
+        pool.questions[qId].GetComponent<QuestionBehaviour>().question.active = true;
+        Profile.SaveProfile();
         networkView.RPC("ReturnQuestion", RPCMode.Others, temp);
     }
 

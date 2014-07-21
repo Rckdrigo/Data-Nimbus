@@ -44,16 +44,19 @@ public class QuestionPool : MonoBehaviour {
 
     public GameObject CreateSphere(int randomAtractor)
     {
-		for(int i = 0; i < questions.Count; i++){
-			if(!questions[i].activeInHierarchy){
-				questions[i].SetActive(true);
-                questions[i].transform.position = atractors[randomAtractor].transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
-				questions[i].transform.rotation = atractors[randomAtractor].transform.rotation;
-				questions[i].transform.parent = atractors[randomAtractor];
-				return questions[i];
-			}
-		}
-        return null;
+        int i = Random.Range(0, questions.Count);
+        //for(int i = 0; i < questions.Count; i++){
+        if (!questions[i].activeInHierarchy)
+        {
+            questions[i].SetActive(true);
+            questions[i].transform.position = atractors[randomAtractor].transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
+            questions[i].transform.rotation = atractors[randomAtractor].transform.rotation;
+            questions[i].transform.parent = atractors[randomAtractor];
+        }
+
+		return questions[i];
+		//}
+        //return null;
     }
 
 }
