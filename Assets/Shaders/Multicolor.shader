@@ -39,15 +39,15 @@
          	half4 textureColor;
          	half y =input.worldPosition.y;
          	if(y <= 0)
-         		textureColor = half4(0.92,0.619,0.274,1);
+         		textureColor = half4(0,0.266,0.368,1);
  			else if(y > 0 && y <= 5)
- 				textureColor = half4(1,0.8,0.333,1);
+ 				textureColor = half4(0.411,0.705,0.788,1);
  			else if(y > 5 && y <= 10)
  				textureColor = half4(0.568,0.745,0.682,1);
  			else if(y > 10 && y <= 15)
- 				textureColor = half4(0.411,0.705,0.788,1);
+ 				textureColor = half4(1,0.8,0.333,1);
  			else
-         		textureColor = half4(0,0.266,0.368,1);
+         		textureColor = half4(0.92,0.619,0.274,1);
             return textureColor * input.diffuseIntensity.x; 
          }
  

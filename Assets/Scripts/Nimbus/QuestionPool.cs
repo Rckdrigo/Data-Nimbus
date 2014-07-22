@@ -45,7 +45,6 @@ public class QuestionPool : MonoBehaviour {
     public GameObject CreateSphere(int randomAtractor)
     {
         int i = Random.Range(0, questions.Count);
-        //for(int i = 0; i < questions.Count; i++){
         if (!questions[i].activeInHierarchy)
         {
             questions[i].SetActive(true);
@@ -53,10 +52,7 @@ public class QuestionPool : MonoBehaviour {
             questions[i].transform.rotation = atractors[randomAtractor].transform.rotation;
             questions[i].transform.parent = atractors[randomAtractor];
         }
-
 		return questions[i];
-		//}
-        //return null;
     }
 
 }
