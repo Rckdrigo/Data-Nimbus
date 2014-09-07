@@ -1,6 +1,5 @@
 ﻿Shader "MyShaders/CellShade" {
 	Properties{
-		
 		_MainTex("Main Texture",2D) = "white" {}
 		_LineColor("Line Color",Color) = (0,0,0,0)
 		_LineWidth("Line Width",Range(0,100)) = 0

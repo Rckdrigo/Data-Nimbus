@@ -3,44 +3,31 @@ using System.Collections;
 
 public class QuestionBehaviour : MonoBehaviour {
 
-    public GameObject[] satellites;
     public GameData.Question question;
-
+	[HideInInspector()]
+	public int count = 0;
+#if UNITY_ANDROID
     void OnMouseDown() {
         if (!GameObject.Find("ButtonAdd").GetComponent<AddButton>().addingQuestion)
         {
-            for (int i = 0; i < satellites.Length; i++)
-            {
-                if (!satellites[i].activeInHierarchy)
-                {
-                    satellites[i].SetActive(true);
-                   break;
-                }
-            }
             GameObject.Find("ButtonAdd").GetComponent<AddButton>().addingQuestion = true;
+			GameObject.Find("ButtonAdd").GetComponent<AddButton>().currentQ = int.Parse(name);
+			GameObject.Find("ButtonAdd").GetComponent<AddButton>().newSphere = false;
             GameObject.Find("ButtonAdd").GetComponent<AddButton>().networkView.RPC("AskQuestion", RPCMode.Server, int.Parse(name));
-            networkView.RPC("activateSatellite", RPCMode.Server, name);
         }
     }
+	
 
-	void OnPreRender() {
-		GL.wireframe = true;
+#endif
+	public void increaseSize(float scale) {
+		if(transform.localScale.x < 3*5)
+			transform.localScale += new Vector3(scale,scale,scale);
+		networkView.RPC("sameSize",RPCMode.Server,transform.localScale);
 	}
-	void OnPostRender() {
-		GL.wireframe = false;
+	
+	[RPC]
+	void sameSize(Vector3 size){
+		transform.localScale = size;
 	}
-
-    [RPC]
-    void activateSatellite(string name) {
-        QuestionBehaviour reference = GameObject.Find(name).GetComponent<QuestionBehaviour>();
-        for (int i = 0; i < reference.satellites.Length; i++)
-        {
-            if (!reference.satellites[i].activeInHierarchy)
-            {
-                reference.satellites[i].SetActive(true);
-                break;
-            }
-        }
-    }
 
 }

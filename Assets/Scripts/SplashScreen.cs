@@ -22,6 +22,10 @@ public class SplashScreen : MonoBehaviour {
         }
 	}
 
+	void OnDisconnectedFromServer(){
+		reactivate();
+	}
+
     void reactivate() {
         collider2D.enabled = true;
         renderer.enabled = true;

@@ -16,19 +16,20 @@ public class SelectPlatform : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         MasterServer.ipAddress = ip;
-
+		Screen.fullScreen = true;
 #if UNITY_ANDROID
-            Destroy(pcCam);
-            arCam.SetActive(true);
-            imgTarget.SetActive(true);
-            StartCoroutine(seekConnection());
+	    Destroy(pcCam);
+	    arCam.SetActive(true);
+	    imgTarget.SetActive(true);
+    	StartCoroutine(seekConnection());
 #else
-            pcCam.SetActive(true);
-            Destroy(imgTarget);
-            Destroy(arCam);
-            dataNimbus.transform.parent = null;
-            Network.InitializeServer(5, connectionPort, false);
-            MasterServer.RegisterHost("DataNimbus", "DataNimbus");
+		Screen.fullScreen = true;
+	    pcCam.SetActive(true);
+	    Destroy(imgTarget);
+	    Destroy(arCam);
+	    dataNimbus.transform.parent = null;
+	    Network.InitializeServer(5, connectionPort, false);
+	    MasterServer.RegisterHost("DataNimbus", "DataNimbus");
 #endif                      
 	}
 

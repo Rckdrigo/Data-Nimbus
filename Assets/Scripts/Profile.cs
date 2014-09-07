@@ -51,24 +51,30 @@ public class Profile : MonoBehaviour{
     }
 
 	void Update(){
+		if(Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit();
+
         if (!Network.isServer)
             SaveProfile();
 
 		if(Input.GetKeyDown(KeyCode.S))
 			SaveProfile();
-
+		/*
         if (Input.GetKeyDown(KeyCode.P))
             printProfile();
 
         if(Input.GetKeyDown(KeyCode.L))
             StartCoroutine(LoadProfile());
-
+*/
         if(Input.GetKeyDown(KeyCode.C)){
             for (int i = 0; i < data.question.Length; i++ ){
                 data.question[i].id = i;
                 data.question[i].text = "Question "+i;
                 data.question[i].active = true;
                 for (int j = 0; j < data.question[i].answer.Length; j++)
+					if(Random.Range(0,10) < 7)
+						data.question[i].answer[j].text = "parangaricutirumicuaro";
+				else
                     data.question[i].answer[j].text = "A" + j;
             }
         }
@@ -93,10 +99,7 @@ public class Profile : MonoBehaviour{
         foreach (GameObject q in pool.questions)
         {
             if (q.activeInHierarchy)
-            {
-                print( int.Parse(q.name)+"\t"+int.Parse(q.transform.parent.name.Replace("Atractor ", ""))+"\t");
-                networkView.RPC("sendGameDataToPlayer", player, int.Parse(q.name), int.Parse(q.transform.parent.name.Replace("Atractor ", "")), q.transform.position);
-            }
+                networkView.RPC("sendGameDataToPlayer", player, int.Parse(q.name), int.Parse(q.transform.parent.name.Replace("Atractor ", "")), q.transform.position,q.transform.localScale,q.transform.rotation);
         }
     }
 
@@ -104,7 +107,7 @@ public class Profile : MonoBehaviour{
     {
         SaveProfile();
     }
-
+	
     void printProfile() {
         for (int i = 0; i < data.question.Length; i++)
         {
@@ -120,12 +123,15 @@ public class Profile : MonoBehaviour{
     {
         XMLManager.CreateXML("profile.xml", XMLManager.SerializeObject(data, "GameData"));
     }
+
     [RPC]
-    void sendGameDataToPlayer(int id, int atractor, Vector3 position) {
+    void sendGameDataToPlayer(int id, int atractor, Vector3 position, Vector3 scale, Quaternion rotation) {
         QuestionPool pool = GetComponent<QuestionPool>();
         pool.questions[id].SetActive(true);
         pool.questions[id].transform.parent = GameObject.Find("Atractor "+atractor).transform;
         pool.questions[id].transform.position = position;
+		pool.questions[id].transform.rotation = rotation;
+ 		pool.questions[id].transform.localScale = scale;
     }
 }
 

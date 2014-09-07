@@ -4,9 +4,15 @@
     <Question id="0" active="true">
       <text>¿Qué recuerdos tienes de este lugar?</text>
       <answer>
-        <Answer />
-        <Answer />
-        <Answer />
+        <Answer>
+          <text>A0</text>
+        </Answer>
+        <Answer>
+          <text>A1</text>
+        </Answer>
+        <Answer>
+          <text>A1</text>
+        </Answer>
         <Answer />
         <Answer />
       </answer>
@@ -14,18 +20,24 @@
     <Question id="1" active="true">
       <text>¿Qué has aprendido en este lugar?</text>
       <answer>
-        <Answer />
+        <Answer>
+          <text>A1</text>
+        </Answer>
         <Answer />
         <Answer />
         <Answer />
         <Answer />
       </answer>
     </Question>
-    <Question id="2" active="false">
+    <Question id="2" active="true">
       <text>¿Cómo podría ser mejor este lugar?</text>
       <answer>
-        <Answer />
-        <Answer />
+        <Answer>
+          <text>A1</text>
+        </Answer>
+        <Answer>
+          <text>A1</text>
+        </Answer>
         <Answer />
         <Answer />
         <Answer />
@@ -171,7 +183,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="17" active="true">
+    <Question id="17" active="false">
       <text>Describe lo que estás viendo</text>
       <answer>
         <Answer />
@@ -201,7 +213,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="20" active="true">
+    <Question id="20" active="false">
       <text>¿Qué determina que un lugar esté ocupado o no?</text>
       <answer>
         <Answer />
@@ -701,7 +713,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="70" active="true">
+    <Question id="70" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -971,7 +983,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="97" active="true">
+    <Question id="97" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1121,7 +1133,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="112" active="true">
+    <Question id="112" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1131,7 +1143,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="113" active="true">
+    <Question id="113" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1201,7 +1213,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="120" active="true">
+    <Question id="120" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1241,7 +1253,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="124" active="true">
+    <Question id="124" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1281,7 +1293,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="128" active="true">
+    <Question id="128" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
@@ -1291,7 +1303,7 @@
         <Answer />
       </answer>
     </Question>
-    <Question id="129" active="true">
+    <Question id="129" active="false">
       <text>Inserta pregunta aqui</text>
       <answer>
         <Answer />
